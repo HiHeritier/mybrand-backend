@@ -26,7 +26,7 @@ module.exports = (req, res, next) => {
 
     req.userId = decodedToken.userId;
     
-    const adminId = "625bbaace92c2353832a6a61";
+    const adminId = "6263c896208a64a623fb0fe3";
 
     if (req.userId !== adminId) {
         const error = new Error('Not authorized!');

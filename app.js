@@ -6,6 +6,12 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const dotenv = require('dotenv');
 
+const cors = require("cors");
+const morgan = require("morgan");
+const swaggerDoc = require("./swagger.json");
+const swaggerUI = require("swagger-ui-express");
+
+
 const feedRoutes = require('./routes/feed');
 const authRoutes = require('./routes/auth');
 const queryRoutes = require('./routes/query');
@@ -48,9 +54,17 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/feed', feedRoutes);
+app.use('/api', feedRoutes);
 app.use('/auth', authRoutes);
 app.use('/query', queryRoutes);
+
+app.use(cors());
+app.use(morgan("dev"));
+app.use("/api/", feedRoutes, authRoutes, queryRoutes);
+app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerDoc, { explorer: true }));
+app.use("*", (req, res, next) => {
+	res.status(404).json({ error: "NOT FOUND", });
+});
 
 app.use((error, req, res, next) => {
   console.log(error);
@@ -59,6 +73,7 @@ app.use((error, req, res, next) => {
   const data = error.data
   res.status(status).json({ message: message, data: data });
 });
+module.exports = app;
 
 mongoose
   .connect( process.env.MONGODB_URI )
@@ -66,3 +81,8 @@ mongoose
     app.listen(process.env.PORT || 3000);
   })
   .catch(err => console.log(err));
+
+
+
+
+  

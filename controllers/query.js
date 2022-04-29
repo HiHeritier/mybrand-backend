@@ -5,7 +5,7 @@ exports.getQueries = (req, res, next) => {
         res.status(200).json({message: 'Queries fetched successfully', queries: queries})
     }).catch(err => {
         if (!err.statusCode) {
-            err.statusCode = 500;
+            err.statusCode = 404;
           }
           next(err);
     });
@@ -26,7 +26,7 @@ exports.createQuery = (req, res, next) => {
         res.status(201).json({message: 'message sent!!', query: result})
     }).catch(err => {
         if (!err.statusCode) {
-            err.statusCode = 500;
+            err.statusCode = 404;
           }
           next(err);
     });
@@ -39,7 +39,7 @@ exports.deleteQuery = (req, res, next) => {
         res.status(200).json({message: 'message deleted'})
     }).catch(err => {
         if (!err.statusCode) {
-            err.statusCode = 500;
+            err.statusCode = 404;
           }
           next(err);
     });

@@ -1,0 +1,473 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "API swagger doc",
+        "description": "API swagger documentation.",
+        "contact": {
+            "name": "HISHAMUNDA Heritier",
+            "email": "hishamunda221015883@gmail.com",
+            "url": "capstone@netlify.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.1"
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "authorization",
+            "in": "header"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://localhost:3000",
+            "name": "dev"
+        }
+    ],
+    "paths": {
+        "/query/message": {
+            "post": {
+                "tags": [
+                    "Query"
+                ],
+                "summary": "Send message",
+                "description": "send message to the admin",
+                "operationId": "Query",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Resource payload",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "username": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "username",
+                                "email",
+                                "message"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Message sent"
+                    }
+                }
+            }
+        },
+        "/query/messages": {
+            "get": {
+                "tags": [
+                    "Query"
+                ],
+                "summary": "Get all Query",
+                "description": "all sent querries",
+                "OperationId": "all sent querries",
+                "responses": {
+                    "200": {}
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/query/message/{id}": {
+            "delete": {
+                "tags": [
+                    "Query"
+                ],
+                "summary": "Delete one query",
+                "description": "Delete sent query",
+                "OperationId": "Delete sent quey",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type": "string",
+                        "description": "query Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "query successful deleted"
+                    }
+                }
+            }
+        },
+        "/auth/seed": {
+            "post": {
+                "tags": [
+                    "Admin signup"
+                ],
+                "description": "sign up new admin",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "username": {
+                                    "example": "string"
+                                },
+                                "email": {
+                                    "example": "string"
+                                },
+                                "password": {
+                                    "example": "string"
+                                },
+                                "role": {
+                                    "example": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "required": true
+                    }
+                }
+            }
+        },
+        "/api/posts": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/post": {
+            "post": {
+                "tags": [
+                    "Posts"
+                ],
+                "description": "",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "name": "image",
+                        "in": "formData",
+                        "required": true,
+                        "type": "file"
+                    },
+                    {
+                        "name": "title",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "content",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "title": {
+                                    "example": "string"
+                                },
+                                "content": {
+                                    "example": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/post/{postId}": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Posts"
+                ],
+                "description": "",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "image",
+                        "in": "formData",
+                        "required": true,
+                        "type": "file"
+                    },
+                    {
+                        "name": "title",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "content",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "title": {
+                                    "example": "any"
+                                },
+                                "content": {
+                                    "example": "any"
+                                },
+                                "image": {
+                                    "example": "any"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Posts"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/post/{postId}/comment": {
+            "post": {
+                "tags": [
+                    "Comment"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "obj",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "username": {
+                                    "example": "string"
+                                },
+                                "comment": {
+                                    "example": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/post/{postId}/comments": {
+            "get": {
+                "tags": [
+                    "Comment"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Login for Standard-User |Admin",
+                "description": "Login for user's either standard-user or admin",
+                "operationId": "Login",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Resource payload",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "login successful"
+                    }
+                }
+            }
+        },
+        "/auth/signup": {
+            "put": {
+                "tags": [
+                    "User signup"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "username": {
+                                    "example": "string"
+                                },
+                                "email": {
+                                    "example": "string"
+                                },
+                                "password": {
+                                    "example": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                }
+            }
+        }
+    }
+}
