@@ -29,7 +29,7 @@ describe("POST API /api", () => {
       .request(server)
       .post("/auth/login")
       .send(admini)
-      .set({ Authorization: `Bearer ${"6263c896208a64a623fb0fe3"}` })
+      .set({ Authorization: `Bearer ${token}` })
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a("object");
@@ -94,7 +94,7 @@ describe("POST API /query", () => {
     chai
       .request(server)
       .delete("/query/message/:id")
-      .set({ Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhpaGVyaXRpZXI3QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInVzZXJJZCI6IjYyNjNjODk2MjA4YTY0YTYyM2ZiMGZlMyIsImlhdCI6MTY1MTIzMzg5NSwiZXhwIjoxNjUxMjM3NDk1fQ.KkMCa8Y4xCvxGplcTx4yaRes-Odnhom5I7gwWywkW-s"}` })
+      .set({ Authorization: `Bearer ${token}` })
       .send(messages)
       .end((err, res) => {
         if (err) return done(err);
@@ -122,7 +122,7 @@ describe("POST API /query", () => {
       .request(server)
       .get("/query/messages")
       .send(messages)
-      .set({ Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhpaGVyaXRpZXI3QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInVzZXJJZCI6IjYyNjNjODk2MjA4YTY0YTYyM2ZiMGZlMyIsImlhdCI6MTY1MTIzMzg5NSwiZXhwIjoxNjUxMjM3NDk1fQ.KkMCa8Y4xCvxGplcTx4yaRes-Odnhom5I7gwWywkW-s"}` })
+      .set({ Authorization: `Bearer ${token}` })
       .end((err, res) => {
         if (err) return done(err);
         console.log(res.status)
@@ -192,7 +192,7 @@ it("should successfully create a post and return 422", (done) => {
     .request(server)
     .post("/api/post/")
     .send(post)
-    .set({ Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhpaGVyaXRpZXI3QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInVzZXJJZCI6IjYyNjNjODk2MjA4YTY0YTYyM2ZiMGZlMyIsImlhdCI6MTY1MTIzMzg5NSwiZXhwIjoxNjUxMjM3NDk1fQ.KkMCa8Y4xCvxGplcTx4yaRes-Odnhom5I7gwWywkW-s"}` })
+    .set({ Authorization: `Bearer ${token}` })
     .end((err, res) => {
       if (err) return done(err);
       console.log(res.status)
@@ -233,7 +233,7 @@ it("should successfully GET post by id and return 404", (done) => {
   chai
     .request(server)
     .get("/api/posts/:id")
-    .set({ Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhpaGVyaXRpZXI3QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInVzZXJJZCI6IjYyNjNjODk2MjA4YTY0YTYyM2ZiMGZlMyIsImlhdCI6MTY1MTIzMzg5NSwiZXhwIjoxNjUxMjM3NDk1fQ.KkMCa8Y4xCvxGplcTx4yaRes-Odnhom5I7gwWywkW-s"}` })
+    .set({ Authorization: `Bearer ${token}` })
     .send(post)
     .end((err, res) => {
       if (err) return done(err);
@@ -248,7 +248,7 @@ it("should successfully Update a post and return 422", (done) => {
     .request(server)
     .put("/api/post/:id")
     .send(post)
-    .set({ Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhpaGVyaXRpZXI3QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInVzZXJJZCI6IjYyNjNjODk2MjA4YTY0YTYyM2ZiMGZlMyIsImlhdCI6MTY1MTIzMzg5NSwiZXhwIjoxNjUxMjM3NDk1fQ.KkMCa8Y4xCvxGplcTx4yaRes-Odnhom5I7gwWywkW-s"}` })
+    .set({ Authorization: `Bearer ${token}` })
     .end((err, res) => {
       if (err) return done(err);
       console.log(res.status)
@@ -262,7 +262,7 @@ it("should successfully delete a post and return 500", (done) => {
     .request(server)
     .delete("/api/post/:id")
     .send(post)
-    .set({ Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhpaGVyaXRpZXI3QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInVzZXJJZCI6IjYyNjNjODk2MjA4YTY0YTYyM2ZiMGZlMyIsImlhdCI6MTY1MTIzMzg5NSwiZXhwIjoxNjUxMjM3NDk1fQ.KkMCa8Y4xCvxGplcTx4yaRes-Odnhom5I7gwWywkW-s"}` })
+    .set({ Authorization: `Bearer ${token}` })
     .end((err, res) => {
       if (err) return done(err);
       console.log(res.status)
@@ -367,3 +367,44 @@ describe("POST API /api", () => {
 
 });
 })
+
+
+
+const swaggerDefinition = {
+  openapi: '3.0.0',
+  info: {
+    title: 'Express API for My Blog',
+    version: '1.0.0',
+  },
+  description:
+  'This is a REST API application made with Express. It retrieves data from Mongodb using mongoose.',
+license: {
+  name: 'Licensed Under MIT',
+  url: '',
+},
+contact: {
+  name:"Hishamunda Heritier",
+  url: '',
+},
+servers: [
+  {
+    url: 'https://hiheritier-blog.herokuapp.com/'
+  }]
+  ,
+  security: [
+    {
+      bearerAuth: [],
+    },
+  ],
+  components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+          name: 'bearerAuth',
+          in: 'header'
+        }
+      }
+  },
+};
